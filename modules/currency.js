@@ -13,7 +13,7 @@ const Converter = require("@helixnetwork/converter");
 const Validator = require('@helixnetwork/validators');
 const generateAddress = require("@helixnetwork/core").generateAddress;
 
-const PROVIDER = conf.helix.provider;
+
 const STORE_TX = false;
 const MWM = 2;
 const DEPTH = 5;
@@ -28,7 +28,7 @@ const CONVERSION_TABLE = {
 } 
 
 const helix = Helix.composeAPI({
-  provider: PROVIDER
+  provider: process.env.PROVIDER_ADDRESS
 });
 
 let storedTxBytes;

@@ -7,10 +7,10 @@ const { Autohook } = require('twitter-autohook');
 const conf = require('../conf.json');
 
 let client = new Twitter({
-        consumer_key: conf.twitter.consumer_key,
-        consumer_secret: conf.twitter.consumer_secret,
-        access_token: conf.twitter.access_token_key,
-        access_token_secret: conf.twitter.access_token_secret
+        consumer_key: process.env.TWITTER_CONSUMER_KEY,
+        consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+        access_token: process.env.TWITTER_ACCESS_TOKEN,
+        access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
 // Outputs the follower counts
@@ -27,20 +27,20 @@ client.get('followers/ids', function(err, tweets){
 async function autohook(){
   try {
     const webhook = new Autohook({
-      token: conf.twitter.access_token_key,
-      token_secret: conf.twitter.access_token_secret,
-      consumer_key: conf.twitter.consumer_key,
-      consumer_secret: conf.twitter.consumer_secret,
-      env: conf.twitter.env,
-      port: 80
+      token:  process.env.TWITTER_ACCESS_TOKEN,
+      token_secret:  process.env.TWITTER_ACCESS_TOKEN_SECRET,
+      consumer_key: process.env.TWITTER_CONSUMER_KEY,
+      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+      env: process.env.TWITTER_WEBHOOK_ENV,
+      port: 8966
     });
 
     await webhook.removeWebhooks();
     await webhook.start();
     await webhook.subscribe(
       { 
-          oauth_token:conf.twitter.access_token_key, 
-          oauth_token_secret:conf.twitter.access_token_secret
+          oauth_token:  process.env.TWITTER_ACCESS_TOKEN,
+          oauth_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
       });
 
       return webhook;

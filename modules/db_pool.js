@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const conf = require('../conf.json');
 
 // MongoDB Connection Url
-const connection_url = conf.db.host + conf.db.db_name;
+const connection_url = process.env.MONGO_DB_URL + conf.db.db_name;
 
 // Connection variable
 let connection;

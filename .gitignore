@@ -105,7 +105,7 @@ dist
 
 # config
 
+.env.twitter
 conf.*
 examples.js
 legacy/*
-

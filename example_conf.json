@@ -1,6 +1,5 @@
 {
   "db": {
-    "host": "-",
     "db_name":"/helix-twitter",
     "options":{
       "useNewUrlParser": true,
@@ -16,15 +15,9 @@
   },
   "twitter": {
     "status": "active",
-    "token": "Secret access token",
-    "consumer_key": "-",
-    "consumer_secret": "-",
-    "access_token_key": "-",
-    "access_token_secret": "-",
     "keyword": "HelixTipBot"
   },
   "helix": {
-    "provider": "<provider-address>",
     "local": "http://localhost:8085"
   },
   "messages": {
