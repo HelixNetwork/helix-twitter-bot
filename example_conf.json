@@ -1,0 +1,73 @@
+{
+  "db": {
+    "host": "-",
+    "db_name":"/helix-twitter",
+    "options":{
+      "useNewUrlParser": true,
+      "useUnifiedTopology": true,
+      "useCreateIndex": true,
+      "useFindAndModify": false,
+      "autoIndex": false, 
+      "poolSize": 10, 
+      "serverSelectionTimeoutMS": 5000, 
+      "socketTimeoutMS": 45000,
+      "family": 4
+    }
+  },
+  "twitter": {
+    "status": "active",
+    "token": "Secret access token",
+    "consumer_key": "-",
+    "consumer_secret": "-",
+    "access_token_key": "-",
+    "access_token_secret": "-",
+    "keyword": "HelixTipBot"
+  },
+  "helix": {
+    "provider": "<provider-address>",
+    "local": "http://localhost:8085"
+  },
+  "messages": {
+    "typing_delay":1500,
+    "error": "⛔😫 Sorry %name%, something went wrong",
+    "restricted_command": "The command you are trying to access can be only be performed by DM 😥. Use the HelixTipBot !help request to get an overview of available commands.🙋",
+    "invalid_command": "No valid command could be parsed 😲. Use the !help request to get an overview of available commands.",
+    "help":
+    "Commands:🌊\n 🤑 !account: show balance \n ⚡ !register: creates an id \n 🌠 !withdraw <address> <unit>: withdraws your balance \n ✨ !tip <nick> <amount> <unit>: tip a user \n 🌱 !terms: terms and conditions \n 😢 !deregister : Removes an existing account from database ✌ \n\n Kindly note ☝, a valid unit is $mHLX, $hlx, etc and are case insensitive",
+    "help_ext":
+    "Commands:🌊\n 🤑 !account: show balance \n ⚡ !register: creates an id \n 🌠 !withdraw <address> <unit>: withdraws your balance \n ✨ !tip <nick> <amount> <unit>: tip a user \n 🌱 !terms: terms and conditions \n 😢 !deregister : Removes an existing account from database",
+    "terms":
+      "Terms and Conditions:\n 🏆 There are no fees to use the HelixTipBot \n ⚠ In no event shall Helix be responsible in the event of lost, stolen or misdirected funds "
+    },
+    "quick_reply_obj":{   
+      "type": "options",
+      "options":[
+        {
+          "label": "HelixTipBot !account",
+          "description": "🤑 Show me account details ",
+          "metadata": "account"
+        },
+        {
+          "label": "HelixTipBot !help",
+          "description": "🙋 Show me available commands",
+          "metadata": "help"
+        },
+        {
+          "label": "HelixTipBot !deregister",
+          "description": "⭕ Deregister from an account ",
+          "metadata": "deregister"
+        },
+        {
+          "label": "HelixTipBot !register",
+          "description": "🎉 Register a new account ",
+          "metadata": "register"
+        },
+        {
+          "label": "HelixTipBot !terms",
+          "description": "☝ Show me the terms and conditions ",
+          "metadata": "terms"
+        }
+      ]
+},
+"error_codes":{"completed":1, "error":2, "insufficientBalance":3,"invalidparams":4}
+}

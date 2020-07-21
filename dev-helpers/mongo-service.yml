@@ -1,0 +1,11 @@
+# For development purposes only
+# docker stack deploy -c mongo-service.yml mongo // to deploy using docker swarm
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
