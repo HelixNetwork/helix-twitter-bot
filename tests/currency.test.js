@@ -42,7 +42,6 @@ describe("Create a helix public key for a specifiable index using the seed", () 
       testData.accounts[0].helix_seed,
       0
     );
-    console.log("Addr===", response);
     // expect(response).to.match(/[0-9a-f]{72}/);
     expect(response).equal("7dc95007baf05246ab0cb10884f41d9387aa0187a83a8c1523b2fe73912d0b90981de79c");
   });
