@@ -32,7 +32,7 @@ async function autohook(){
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
       consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
       env: process.env.TWITTER_WEBHOOK_ENV,
-      port: 8966
+      port: conf.twitter.autohook_port
     });
 
     await webhook.removeWebhooks();
