@@ -6,7 +6,6 @@ The Helix Twitter Bot allows users to tip the HLX cryptocurrency using their Twi
 - Registered twitter developer account. If not, you can signup for a twitter developer account at [here](developer.twitter.com)
 - Register your app at [here](https://developer.twitter.com/en/apps). Generate Consumer API and Access token APIs keys with access level for read, write and direct messages
 - Set up dev enviornments and associate your dev enviornments with your app [here](https://developer.twitter.com/en/account/environments) for Account Activity API Sandbox.
-- Create a conf.json file based on the example_conf.json file in the root of the project. Keep in mind not to commit it to the repo.
 - Also set up your twitter and other secrets  in your server by sourcing the env variables as mentioned in the example.env file in the root of the repo
 - Nodejs ^10
 

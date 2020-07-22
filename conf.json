@@ -15,7 +15,8 @@
   },
   "twitter": {
     "status": "active",
-    "keyword": "HelixTipBot"
+    "keyword": "HelixTipBot",
+    "autohook_port":"80"
   },
   "helix": {
     "local": "http://localhost:8085"
