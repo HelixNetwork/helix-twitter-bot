@@ -16,3 +16,5 @@ artifacts:
     - conf.json
     - node_modules/**/*
     - packacge.json
+    - Procfile
+    - .npmrc
