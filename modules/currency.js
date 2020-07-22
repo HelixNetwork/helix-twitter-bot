@@ -233,7 +233,7 @@ async function transfer(seed, target_value, address,address_index ,unit="$mHLX",
    if(currentBalance < value){
     log.info("Insufficient balance in account for sending to ",address);
     results.status = txStatus.insufficientBalance
-    return results
+    return results;
   }
 
   // prepare inputs for the transactions
