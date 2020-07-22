@@ -15,6 +15,6 @@ artifacts:
     - modules/**/*
     - conf.json
     - node_modules/**/*
-    - packacge.json
+    - packcage.json
     - Procfile
     - .npmrc
