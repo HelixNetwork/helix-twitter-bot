@@ -29,7 +29,7 @@ describe('A new user should be added to the database', () => {
   });
 
   // it('When parameters are of wrong format ,it should not store a new user', async () => {
-  //   expect( db.put(56,"a")).to.throw();
+  //   expect( db.put("","")).to.throw();
   // });
 
 

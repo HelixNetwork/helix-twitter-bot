@@ -1,6 +1,6 @@
 const log = require('ulog');
 const {compact} = require('lodash');
-const commands = require('./modules/commands.js');
+const commands = require('./modules/commands');
 const social = require('./modules/social.js');
 const conf = require('./conf.json')
 const db_pool = require('./modules/db_pool')
