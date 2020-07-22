@@ -19,7 +19,7 @@ The Helix Twitter Bot allows users to tip the HLX cryptocurrency using their Twi
 ## Running Docker Image
 ```
 # Build the docker image
-docker build -t <your username>/node-web-app .
+docker build -t <your username>/helix-twitter-bot .
 
 # Run the docker image
 docker run -p 8966:8966 -d -e "TWITTER_CONSUMER_KEY="  -e "TWITTER_CONSUMER_SECRET=" -e "TWITTER_ACCESS_TOKEN=" -e "TWITTER_ACCESS_TOKEN_SECRET=" -e "TWITTER_WEBHOOK_ENV=" -e "MONGO_DB_URL=" -e "PROVIDER_ADDRESS=" <your username>/helix-twitter-bot 
