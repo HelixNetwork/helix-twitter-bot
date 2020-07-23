@@ -19,6 +19,11 @@
             "twitter_id": "abramjohn",
             "helix_seed": "a84921007ca75c5239ea56c833440c4596f9e2d4b25051580e83cd950626d86f",
             "address_index": 1
+          },
+          {
+            "twitter_id": "",
+            "helix_seed": "a84921007ca75c5239ea56c833440c4596f9e2d4b25051580e83cd950626d86f9iokjuhgrgusnd1234",
+            "address_index": 8
           }
 ]
 }
