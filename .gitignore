@@ -108,3 +108,4 @@ dist
 .env.twitter
 examples.js
 legacy/*
+.vscode/

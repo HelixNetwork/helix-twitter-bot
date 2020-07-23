@@ -16,7 +16,7 @@ const drop = require('lodash').drop;
  */
 
 async function performResponseAction(command_string ,  isDm = false, dest , userid ,replyid = null){
-  let match = split(command_string.text,' ');
+  let match = split(command_string,' ');
   if (match == null){ return }
   // finds keyword index, replies may have some keywords coming in front
   let findCommandIndex = findLastIndex(match, function(o) { return o == conf.twitter.keyword || o == `@${conf.twitter.keyword}` ; }); 
