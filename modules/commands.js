@@ -20,7 +20,7 @@ const txStatus = Object.freeze(conf.error_codes);
 function help(dest,isDm, userid , replyid){
   log.info(`@${dest} requested !help`);
   if (isDm){
-    social.dm(dest,userid,conf.messages.help)
+    social.dm(dest,userid,conf.messages.help,replyid)
   }else{
     social.tweet(dest, replyid, conf.messages.help_ext);
   }
@@ -38,7 +38,7 @@ function help(dest,isDm, userid , replyid){
 function terms(dest,isDm, userid , replyid){
   log.info(`@${dest} requested !terms`);
   if(isDm){
-    social.dm(dest,userid,conf.messages.terms)
+    social.dm(dest,userid,conf.messages.terms,replyid)
   }
   else{ 
     social.tweet(dest, replyid, conf.messages.terms);
@@ -60,7 +60,7 @@ function error(dest,isDm, userid , replyid, error_message=""){
   if(error_message == "")
     error_message = conf.messages.invalid_command
   if(isDm){
-    social.dm(dest,userid,error_message)
+    social.dm(dest,userid,error_message,replyid)
   }
   else{
     social.tweet(dest, replyid, error_message);
@@ -96,7 +96,7 @@ async function register(dest,isDm, userid, replyid){
     log.error("ID already in use!");
     if(!isDm)
     social.tweet(dest,replyid, "Seems like you already have an account 🤔. A direct message has been sent to you 😊");
-    social.dm(dest, userid, "You already have an account.🤔"+"\n Try HelixTipBot !help for more✨");
+    social.dm(dest, userid, "You already have an account.🤔"+"\n Try HelixTipBot !help for more✨",replyid);
     return;
   }
   let helix_id = currency.generateSeed();
@@ -107,7 +107,7 @@ async function register(dest,isDm, userid, replyid){
   await db.update(dest);
   if(!isDm)
   social.tweet(dest,replyid, "Request received 😍. A direct message has been sent!✌");
-  social.dm(dest, userid, "Yaay!!!🎉🎉🎉.New Account successfully registered.✨ \n Generated deposit address:\n" + addr);
+  social.dm(dest, userid, "Yaay!!!🎉🎉🎉.New Account successfully registered.✨ \n Generated deposit address:\n" + addr,replyid);
   return addr;
 }
 
@@ -124,7 +124,7 @@ function deregister(dest, isDm,userid, replyid){
   db.remove(dest);
   if(!isDm)
   social.tweet(dest,replyid, "Request received😥. A direct message has been sent!⚡");
-  social.dm(dest, userid, `The account @${dest} has been removed from our database ⛑, you may re-register at any time.🙋`);
+  social.dm(dest, userid, `The account @${dest} has been removed from our database ⛑, you may re-register at any time.🙋`,replyid);
 }
 
 /**
@@ -142,10 +142,10 @@ async function account(dest,isDm, userid, replyid){
   social.tweet(dest, replyid, "Request received 🌟. A direct message will be sent shortly!✌");
   if (d == null){
     log.error("ID Not found");
-    social.dm(dest, userid, `No account found😲. Kindly register a new account using HelixTipBot !register 😊`);
+    social.dm(dest, userid, `No account found😲. Kindly register a new account using HelixTipBot !register 😊`,replyid);
     return;
   }
-  social.dm(dest, userid, `🌀 twitter_id: @${dest}\n\n📢 deposit address: ${currency.generateAddr(d.helix_seed,d.address_index)}\n\n🎊 balance: ${await currency.getBalancesWithUnit(d.helix_seed, d.address_index)}\n\n⭐ helix_seed: \n${d.helix_seed}`);
+  social.dm(dest, userid, `🌀 twitter_id: @${dest}\n\n📢 deposit address: ${currency.generateAddr(d.helix_seed,d.address_index)}\n\n🎊 balance: ${await currency.getBalancesWithUnit(d.helix_seed, d.address_index)}\n\n⭐ helix_seed: \n${d.helix_seed}`,replyid);
 }
 
 /**
@@ -198,7 +198,7 @@ async function tip(dest, isDm,userid, replyid, target_dest, value,unit ='$mHLX')
   if (d == null){
     if(!isDm)
     social.tweet(dest, replyid, `You seem to have no account 😲.Register a new account by tweeting HelixTipBot !register.✨`);
-    social.dm(dest, userid, `You seem to have no account 😲.Register a new account by messaging me HelixTipBot !register.✨`);
+    social.dm(dest, userid, `You seem to have no account 😲.Register a new account by messaging me HelixTipBot !register.✨`,replyid);
     return
   }
   else if (d2 == null){
@@ -213,16 +213,16 @@ async function tip(dest, isDm,userid, replyid, target_dest, value,unit ='$mHLX')
   log.debug("value: " + value);
   let results = await currency.transfer(d.helix_seed, value, target,d.address_index ,unit);
   if(results.status === txStatus.insufficientBalance){
-    social.dm(dest, userid, `You don't have enough balance to do this transaction.😞.`);
+    social.dm(dest, userid, `You don't have enough balance to do this transaction.😞.`,replyid);
     return
   } else if (results.status === txStatus.error){
-    social.dm(dest, userid, `Something went wrong!!! 🙄`);
+    social.dm(dest, userid, `Something went wrong!!! 🙄`,replyid);
     return
   } else if (results.status === txStatus.invalidparams){
-    social.dm(dest, userid, `You have entered invalid tips parameters 🙄`);
+    social.dm(dest, userid, `You have entered invalid tips parameters 🙄`,replyid);
     return
   } else if (results.status === txStatus.invalidUnit){
-    social.dm(dest, userid, `You have entered invalid unit 🙄`);
+    social.dm(dest, userid, `You have entered invalid unit 🙄`,replyid);
     return
   }
   // No need to update index for zero value transactions
@@ -233,9 +233,9 @@ async function tip(dest, isDm,userid, replyid, target_dest, value,unit ='$mHLX')
   social.client.get('/users/show', { screen_name: target_dest }, (err, res) => {
     if(!isDm)
     social.tweet(dest, replyid, `${value} ${unit}  tip sent to ${target_dest} 🎉🎉. A DM has been sent with further information. Thank you for using our bot`);
-    social.dm(dest, userid, `${value} ${unit} tip sent to ${target_dest}  🎉🎉. You can check the transaction status here: https://explorer.helixmain.net/tx/${results.transfer[0].hash} 😍`);
+    social.dm(dest, userid, `${value} ${unit} tip sent to ${target_dest}  🎉🎉. You can check the transaction status here: https://explorer.helixmain.net/tx/${results.transfer[0].hash} 😍`,replyid);
     if (err) { log.error("There was an error getting the target user id.") }
-    social.dm(target_dest, res.id_str, `Greetings from HelixTipBot.🙋\n\nYou have been tipped ${value} ${unit} by @${dest} 🎉🎉.\n\n You can check the transaction status here: https://explorer.helixmain.net/tx/${results.transfer[0].hash} 😍.\n\n In order to claim your tip, you first need to download the Nautilus wallet from https://hlx.ai/wallet and set up an HLX address. ☝ \n\n If you already have an address, you can claim your tip by replying: @HelixTipBot !withdraw <address> <amount> <unit> and for the full overview of commands @HelixTipBot !help🙋`);
+    social.dm(target_dest, res.id_str, `Greetings from HelixTipBot.🙋\n\nYou have been tipped ${value} ${unit} by @${dest} 🎉🎉.\n\n You can check the transaction status here: https://explorer.helixmain.net/tx/${results.transfer[0].hash} 😍.\n\n In order to claim your tip, you first need to download the Nautilus wallet from https://hlx.ai/wallet and set up an HLX address. ☝ \n\n If you already have an address, you can claim your tip by replying: @HelixTipBot !withdraw <address> <amount> <unit> and for the full overview of commands @HelixTipBot !help🙋`,replyid);
   });
 }
 

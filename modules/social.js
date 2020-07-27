@@ -74,8 +74,9 @@ function tweet(dest, replyid, msg){
 *
 * @param dest the user that sent a request and bot should reply to, e.g. @_nyan1337
 * @param userid userid to dm
+* @param replyid replyid to the tweet
 */
-function dm(dest, userid, msg){
+function dm(dest, userid, msg, replyid=''){
   log.info(`Preparing DM for @${dest}...`);
   // send typcling response
   typing(dest,userid);
@@ -98,8 +99,12 @@ function dm(dest, userid, msg){
   log.debug(m);
 
   // delaying dm to show typing indicator
-  setTimeout(() => client.post('direct_messages/events/new', msgobj, function(err){
-    if (err){log.error(err)}
+  setTimeout(() => client.post('direct_messages/events/new', msgobj, async function(err){
+    if (err){
+      log.error(err)
+      if(replyid)
+      await tweet(dest,replyid,`Seems like I am not able to send DM to ${dest} 😥,${dest} should follow me in twitter if haven't and try again`)
+    }
     else {log.info(`DM sent to @${dest}!`)}
   }),1500 )
   
