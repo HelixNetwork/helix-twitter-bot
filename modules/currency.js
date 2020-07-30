@@ -209,7 +209,7 @@ async function transfer(seed, target_value, address,address_index ,unit="$mHLX",
   let results ={}
   let value = parseInt(target_value)
    // Checks whether the arguments passed in are valid or not
-   if(!Validator.isAddress(address) || !value){
+   if(!Validator.isAddress(address)){
     results.status = txStatus.invalidparams
     return results
  }
