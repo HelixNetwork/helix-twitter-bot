@@ -3,7 +3,6 @@ Twitter and Telegram integration
 */
 const log = require('ulog');
 const Twitter = require('twit');
-const { Autohook } = require('twitter-autohook');
 const conf = require('../conf.json');
 
 let client = new Twitter({
@@ -20,37 +19,6 @@ client.get('followers/ids', function(err, tweets){
 });
 
 
-
-/**
- *  Webhook for DM functionality
- */
-async function autohook(){
-  try {
-    const webhook = new Autohook({
-      token:  process.env.TWITTER_ACCESS_TOKEN,
-      token_secret:  process.env.TWITTER_ACCESS_TOKEN_SECRET,
-      consumer_key: process.env.TWITTER_CONSUMER_KEY,
-      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-      env: process.env.TWITTER_WEBHOOK_ENV,
-      port: process.env.port
-    });
-
-    await webhook.removeWebhooks();
-    await webhook.start();
-    await webhook.subscribe(
-      { 
-          oauth_token:  process.env.TWITTER_ACCESS_TOKEN,
-          oauth_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-      });
-
-      return webhook;
-
-  } catch (e) {
-    console.error(e);
-    // eslint-disable-next-line no-undef
-    process.exit(1);
-  }
-}
 
 /**
 * Function to tweet using twitter client
@@ -132,6 +100,5 @@ module.exports = {
   tweet,
   dm,
   client,
-  autohook,
   typing
 }
