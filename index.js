@@ -6,7 +6,8 @@ const http = require('http');
 const { Autohook ,validateWebhook, validateSignature} = require('twitter-autohook');
 const db_pool = require('./modules/db_pool')
 const performResponseAction = require('./modules/response_handler')
-const PORT = process.env.port
+const PORT = process.env.PORT
+const token = process.env.AUTH_TOKEN_NGROK;
 
 /**
  * Starts Webhook listener
@@ -83,7 +84,13 @@ db_pool().then(async () =>{
 /**
  *  Webhook for DM functionality
  */
-    const url = await ngrok.connect(PORT);
+    // Ngrok configuration
+    await ngrok.authtoken(token)
+    const url = await ngrok.connect({
+              addr: PORT, 
+              authtoken: token,
+              region: 'eu', 
+          });
     const webhookURL = `${url}/helix-bot/webhook`;
     const config = {
       token:  process.env.TWITTER_ACCESS_TOKEN,
@@ -92,7 +99,6 @@ db_pool().then(async () =>{
       consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
       env: process.env.TWITTER_WEBHOOK_ENV,
     }
-
     startServer(PORT, config);
     const webhook = new Autohook(config);
     await webhook.removeWebhooks();
