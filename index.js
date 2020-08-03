@@ -6,7 +6,7 @@ const http = require('http');
 const { Autohook ,validateWebhook, validateSignature} = require('twitter-autohook');
 const db_pool = require('./modules/db_pool')
 const performResponseAction = require('./modules/response_handler')
-const PORT = process.env.PORT
+const PORT = process.env.port
 const token = process.env.AUTH_TOKEN_NGROK;
 
 /**
